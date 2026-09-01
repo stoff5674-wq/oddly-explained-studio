@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Oddly Explained Studio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            background: #111;
+            color: white;
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .box {
+            background: #222;
+            padding: 20px;
+            border-radius: 15px;
+            max-width: 500px;
+            margin: auto;
+        }
+
+        input, select {
+            width: 90%;
+            padding: 12px;
+            margin: 10px;
+            border-radius: 8px;
+            border: none;
+        }
+
+        button {
+            background: #ff4d00;
+            color: white;
+            border: none;
+            padding: 15px 25px;
+            border-radius: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        #result {
+            margin-top: 20px;
+            text-align: left;
+            white-space: pre-wrap;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="box">
+        <h1>🎬 Oddly Explained Studio</h1>
+
+        <input type="text" id="topic" placeholder="Enter topic">
+
+        <select id="style">
+            <option>Documentary</option>
+            <option>Mystery</option>
+            <option>History</option>
+            <option>Science</option>
+        </select>
+
+        <button onclick="generate()">Generate Episode</button>
+
+        <div id="result"></div>
+    </div>
+
+    <script>
+        function generate() {
+            let topic = document.getElementById("topic").value;
+            let style = document.getElementById("style").value;
+
+            document.getElementById("result").innerHTML =
+                "Topic: " + topic + "\n" +
+                "Style: " + style + "\n\n" +
+                "Episode generation coming soon... 🚀";
+        }
+    </script>
+
+</body>
+</html>
