@@ -1,86 +1,307 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Oddly Explained Studio</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <style>
-        body {
-            background: #111;
-            color: white;
-            font-family: Arial, sans-serif;
-            text-align: center;
-            padding: 20px;
-        }
+<title>Oddly Explained Studio</title>
 
-        .box {
-            background: #222;
-            padding: 20px;
-            border-radius: 15px;
-            max-width: 500px;
-            margin: auto;
-        }
+<style>
+* {
+    box-sizing: border-box;
+}
 
-        input, select {
-            width: 90%;
-            padding: 12px;
-            margin: 10px;
-            border-radius: 8px;
-            border: none;
-        }
+body {
+    margin: 0;
+    background: #0b0b0f;
+    color: #ffffff;
+    font-family: Arial, sans-serif;
+}
 
-        button {
-            background: #ff4d00;
-            color: white;
-            border: none;
-            padding: 15px 25px;
-            border-radius: 10px;
-            font-size: 16px;
-            cursor: pointer;
-        }
+header {
+    padding: 22px;
+    border-bottom: 1px solid #29292f;
+    background: #111116;
+}
 
-        button:hover {
-            opacity: 0.9;
-        }
+.logo {
+    font-size: 24px;
+    font-weight: bold;
+}
 
-        #result {
-            margin-top: 20px;
-            text-align: left;
-            white-space: pre-wrap;
-        }
-    </style>
+.logo span {
+    color: #ff5a1f;
+}
+
+.container {
+    max-width: 900px;
+    margin: auto;
+    padding: 30px 20px;
+}
+
+.hero {
+    margin-bottom: 30px;
+}
+
+.hero h1 {
+    font-size: 36px;
+    margin-bottom: 8px;
+}
+
+.hero p {
+    color: #aaa;
+    font-size: 16px;
+}
+
+.card {
+    background: #15151b;
+    border: 1px solid #29292f;
+    border-radius: 16px;
+    padding: 22px;
+    margin-bottom: 20px;
+}
+
+.card h2 {
+    margin-top: 0;
+}
+
+label {
+    display: block;
+    margin-top: 18px;
+    margin-bottom: 7px;
+    color: #ddd;
+    font-weight: bold;
+}
+
+input,
+select,
+textarea {
+    width: 100%;
+    padding: 13px;
+    border-radius: 9px;
+    border: 1px solid #33333b;
+    background: #0d0d12;
+    color: white;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+button {
+    width: 100%;
+    margin-top: 25px;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #ff5a1f;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+button:hover {
+    opacity: 0.9;
+}
+
+#status {
+    display: none;
+    margin-top: 20px;
+    padding: 15px;
+    background: #202027;
+    border-radius: 10px;
+    color: #ccc;
+}
+
+.features {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+}
+
+.feature {
+    background: #101015;
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #29292f;
+}
+
+.feature strong {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.feature small {
+    color: #999;
+}
+
+@media (max-width: 650px) {
+    .features {
+        grid-template-columns: 1fr;
+    }
+
+    .hero h1 {
+        font-size: 28px;
+    }
+}
+</style>
 </head>
 
 <body>
 
-    <div class="box">
-        <h1>🎬 Oddly Explained Studio</h1>
+<header>
+    <div class="logo">
+        🎬 Oddly <span>Explained</span> Studio
+    </div>
+</header>
 
-        <input type="text" id="topic" placeholder="Enter topic">
+<div class="container">
 
-        <select id="style">
-            <option>Documentary</option>
+    <div class="hero">
+        <h1>Create a New Episode</h1>
+        <p>
+            Turn an idea into a documentary-style episode.
+        </p>
+    </div>
+
+    <div class="card">
+
+        <h2>Episode Settings</h2>
+
+        <label for="topic">Topic</label>
+
+        <input
+            id="topic"
+            type="text"
+            placeholder="Example: The Centralia Mine Fire"
+        >
+
+        <label for="category">Category</label>
+
+        <select id="category">
             <option>Mystery</option>
             <option>History</option>
             <option>Science</option>
+            <option>Strange Events</option>
+            <option>Unexplained</option>
         </select>
 
-        <button onclick="generate()">Generate Episode</button>
+        <label for="length">Video Length</label>
 
-        <div id="result"></div>
+        <select id="length">
+            <option>3 minutes</option>
+            <option selected>5 minutes</option>
+            <option>8 minutes</option>
+            <option>10 minutes</option>
+            <option>15 minutes</option>
+        </select>
+
+        <label for="tone">Narrative Tone</label>
+
+        <select id="tone">
+            <option>Mysterious</option>
+            <option>Cinematic</option>
+            <option>Serious</option>
+            <option>Suspenseful</option>
+            <option>Educational</option>
+        </select>
+
+        <label for="instructions">
+            Additional Instructions
+        </label>
+
+        <textarea
+            id="instructions"
+            placeholder="Anything specific you want the episode to focus on?"
+        ></textarea>
+
+        <button onclick="generateEpisode()">
+            ✨ Generate Episode
+        </button>
+
+        <div id="status"></div>
+
     </div>
 
-    <script>
-        function generate() {
-            let topic = document.getElementById("topic").value;
-            let style = document.getElementById("style").value;
+    <div class="card">
 
-            document.getElementById("result").innerHTML =
-                "Topic: " + topic + "\n" +
-                "Style: " + style + "\n\n" +
-                "Episode generation coming soon... 🚀";
-        }
-    </script>
+        <h2>Production Pipeline</h2>
+
+        <div class="features">
+
+            <div class="feature">
+                <strong>🧠 Script</strong>
+                <small>AI documentary script</small>
+            </div>
+
+            <div class="feature">
+                <strong>🎙️ Voice</strong>
+                <small>AI narration</small>
+            </div>
+
+            <div class="feature">
+                <strong>🎨 Visuals</strong>
+                <small>Scene generation</small>
+            </div>
+
+            <div class="feature">
+                <strong>📝 Subtitles</strong>
+                <small>Automatic captions</small>
+            </div>
+
+            <div class="feature">
+                <strong>🎵 Audio</strong>
+                <small>Music and sound</small>
+            </div>
+
+            <div class="feature">
+                <strong>🎬 Video</strong>
+                <small>Final assembly</small>
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script>
+
+function generateEpisode() {
+
+    const topic = document.getElementById("topic").value;
+    const category = document.getElementById("category").value;
+    const length = document.getElementById("length").value;
+    const tone = document.getElementById("tone").value;
+
+    const status = document.getElementById("status");
+
+    if (topic.trim() === "") {
+
+        status.style.display = "block";
+
+        status.innerHTML =
+            "⚠️ Please enter an episode topic first.";
+
+        return;
+    }
+
+    status.style.display = "block";
+
+    status.innerHTML =
+        "🟢 Episode request created!<br><br>" +
+        "Topic: " + topic + "<br>" +
+        "Category: " + category + "<br>" +
+        "Length: " + length + "<br>" +
+        "Tone: " + tone + "<br><br>" +
+        "🤖 AI generation will be connected in the next stage.";
+
+}
+
+</script>
 
 </body>
 </html>
