@@ -217,10 +217,68 @@ button:hover {
             id="instructions"
             placeholder="Anything specific you want the episode to focus on?"
         ></textarea>
+      
 
-        <button onclick="generateEpisode()">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  <button onclick="generateEpisode()">
             ✨ Generate Episode
         </button>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
         <div id="status"></div>
 
@@ -270,35 +328,69 @@ button:hover {
 
 <script>
 
-function generateEpisode() {
+async function generateEpisode() {
 
     const topic = document.getElementById("topic").value;
     const category = document.getElementById("category").value;
     const length = document.getElementById("length").value;
     const tone = document.getElementById("tone").value;
+const instructions = document.getElementById("instructions").value;
+
 
     const status = document.getElementById("status");
 
     if (topic.trim() === "") {
-
         status.style.display = "block";
-
-        status.innerHTML =
-            "⚠️ Please enter an episode topic first.";
-
+        status.innerHTML = "⚠️ Please enter an episode topic first.";
         return;
     }
 
     status.style.display = "block";
+    status.innerHTML = "⏳ Generating your documentary script...";
 
-    status.innerHTML =
-        "🟢 Episode request created!<br><br>" +
-        "Topic: " + topic + "<br>" +
-        "Category: " + category + "<br>" +
-        "Length: " + length + "<br>" +
-        "Tone: " + tone + "<br><br>" +
-        "🤖 AI generation will be connected in the next stage.";
+    try {
 
+        const response = await fetch(
+            "https://green-mud-581b.oseghalesolomon10.workers.dev",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    topic: topic,
+                    category: category,
+                    length: length,
+                    tone: tone,
+                    instructions: instructions
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Script generation failed."
+            );
+        }
+
+        status.innerHTML =
+            "✅ Script generated successfully!<br><br>" +
+            "<strong>Your AI script is ready.</strong>";
+
+        console.log("Generated script:", data.script);
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.innerHTML =
+            "❌ Something went wrong.<br><br>" +
+            error.message;
+    }
 }
 
 </script>
