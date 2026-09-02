@@ -280,7 +280,15 @@ button:hover {
 
 
 
-        <div id="status"></div>
+        <div id="scriptOutput" style="display:none; margin-top:20px; padding:20px; background:#101015; border:1px solid #29292f; border-radius:12px;">
+    <h2>🧠 Generated Script</h2>
+
+    <pre id="scriptText" style="white-space:pre-wrap; font-family:Arial,sans-serif; color:#ddd; line-height:1.6;"></pre>
+
+    <button onclick="copyScript()" style="margin-top:15px;">
+        📋 Copy Script
+    </button>
+</div>
 
     </div>
 
@@ -377,9 +385,14 @@ const instructions = document.getElementById("instructions").value;
             );
         }
 
-        status.innerHTML =
-            "✅ Script generated successfully!<br><br>" +
-            "<strong>Your AI script is ready.</strong>";
+    status.innerHTML =
+    "✅ Script generated successfully!";
+
+document.getElementById("scriptOutput").style.display = "block";
+
+document.getElementById("scriptText").textContent = data.script;
+
+console.log("Generated script:", data.script);
 
         console.log("Generated script:", data.script);
 
@@ -392,7 +405,13 @@ const instructions = document.getElementById("instructions").value;
             error.message;
     }
 }
+function copyScript() {
+    const script = document.getElementById("scriptText").textContent;
 
+    navigator.clipboard.writeText(script);
+
+    alert("📋 Script copied!");
+}
 </script>
 
 </body>
