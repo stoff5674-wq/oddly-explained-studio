@@ -342,8 +342,7 @@ async function generateEpisode() {
     const category = document.getElementById("category").value;
     const length = document.getElementById("length").value;
     const tone = document.getElementById("tone").value;
-const instructions = document.getElementById("instructions").value;
-
+    const instructions = document.getElementById("instructions").value;
 
     const status = document.getElementById("status");
 
@@ -385,15 +384,12 @@ const instructions = document.getElementById("instructions").value;
             );
         }
 
-    status.innerHTML =
-    "✅ Script generated successfully!";
+        status.innerHTML = "✅ Script generated successfully!";
 
-document.getElementById("scriptOutput").style.display = "block";
+        document.getElementById("scriptOutput").style.display = "block";
 
-document.getElementById("scriptText").textContent = data.script;
-
-console.log("Generated script:", data.script);
-
+        document.getElementById("scriptText").textContent =
+            data.script;
 
     } catch (error) {
 
@@ -404,14 +400,19 @@ console.log("Generated script:", data.script);
             error.message;
     }
 }
+
+
 function copyScript() {
-    const script = document.getElementById("scriptText").textContent;
+
+    const script =
+        document.getElementById("scriptText").textContent;
 
     navigator.clipboard.writeText(script);
 
     alert("📋 Script copied!");
- }
 }
+
+
 </script>
 
 </body>
