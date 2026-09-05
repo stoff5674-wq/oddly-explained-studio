@@ -249,7 +249,9 @@ button:hover {
   <button onclick="generateEpisode()">
             ✨ Generate Episode
         </button>
-
+<button onclick="testVoice()">
+    🎙️ Test Voice
+</button>
 
 
 
@@ -410,7 +412,44 @@ function copyScript() {
 
     alert("📋 Script copied!");
 }
+async function testVoice() {
 
+    const text = "Welcome to Oddly Explained Studio. Today, we're exploring a mystery.";
+
+    try {
+
+        const response = await fetch(
+            "https://green-mud-581b.oseghalesolomon10.workers.dev",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify({
+                    action: "voice",
+                    text: text
+                })
+            }
+        );
+
+        if (!response.ok) {
+            const error = await response.text();
+            throw new Error(error);
+        }
+
+        const audioBlob = await response.blob();
+        const audioUrl = URL.createObjectURL(audioBlob);
+
+        const audio = new Audio(audioUrl);
+        await audio.play();
+
+    } catch (error) {
+
+        console.error(error);
+        alert("❌ Voice test failed: " + error.message);
+
+    }
+}
 
 </script>
 
