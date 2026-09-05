@@ -341,8 +341,6 @@ button:hover {
 </div>
 
 <script>
-function copyScript() }
-
 async function generateEpisode() {
 
     const topic = document.getElementById("topic").value;
@@ -355,12 +353,14 @@ async function generateEpisode() {
 
     if (topic.trim() === "") {
         status.style.display = "block";
-        status.innerHTML = "⚠️ Please enter an episode topic first.";
+        status.innerHTML =
+            "⚠️ Please enter an episode topic first.";
         return;
     }
 
     status.style.display = "block";
-    status.innerHTML = "⏳ Generating your documentary script...";
+    status.innerHTML =
+        "⏳ Generating your documentary script...";
 
     try {
 
@@ -391,9 +391,11 @@ async function generateEpisode() {
             );
         }
 
-        status.innerHTML = "✅ Script generated successfully!";
+        status.innerHTML =
+            "✅ Script generated successfully!";
 
-        document.getElementById("scriptOutput").style.display = "block";
+        document.getElementById("scriptOutput").style.display =
+            "block";
 
         document.getElementById("scriptText").textContent =
             data.script;
@@ -411,6 +413,15 @@ async function generateEpisode() {
 
 function copyScript() {
 
+    const script =
+        document.getElementById("scriptText").textContent;
+
+    navigator.clipboard.writeText(script);
+
+    alert("📋 Script copied!");
+}
+
+
 async function generateVoice() {
 
     const script = document.getElementById("scriptText").textContent;
@@ -424,15 +435,27 @@ async function generateVoice() {
     }
 
     status.style.display = "block";
-    status.innerHTML = "🎙️ Preparing voice...";
+    status.innerHTML = "🎙️ Generating AI voice...";
 
     try {
 
-        // Split the script into safe chunks
         const chunks = [];
+        let remaining = script;
 
-        for (let i = 0; i < script.length; i += 1900) {
-            chunks.push(script.substring(i, i + 1900));
+        while (remaining.length > 0) {
+
+            let chunk = remaining.substring(0, 1900);
+
+            // Try to end at a sentence/space instead of cutting a word
+            if (remaining.length > 1900) {
+                const lastSpace = chunk.lastIndexOf(" ");
+                if (lastSpace > 1000) {
+                    chunk = chunk.substring(0, lastSpace);
+                }
+            }
+
+            chunks.push(chunk);
+            remaining = remaining.substring(chunk.length);
         }
 
         const audioParts = [];
@@ -440,7 +463,7 @@ async function generateVoice() {
         for (let i = 0; i < chunks.length; i++) {
 
             status.innerHTML =
-                "🎙️ Generating voice...<br><br>" +
+                "🎙️ Generating AI voice...<br><br>" +
                 "Part " + (i + 1) + " of " + chunks.length;
 
             const response = await fetch(
@@ -468,7 +491,6 @@ async function generateVoice() {
             audioParts.push(audioBlob);
         }
 
-        // Combine the returned audio files
         const combinedAudio = new Blob(audioParts, {
             type: "audio/mpeg"
         });
@@ -478,8 +500,7 @@ async function generateVoice() {
         voicePlayer.src = audioUrl;
         voicePlayer.style.display = "block";
 
-        status.innerHTML =
-            "✅ Voice generated successfully!";
+        status.innerHTML = "✅ Full AI voice generated!";
 
     } catch (error) {
 
