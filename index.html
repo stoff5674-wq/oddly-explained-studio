@@ -421,7 +421,6 @@ function copyScript() {
     alert("📋 Script copied!");
 }
 
-
 async function generateVoice() {
 
     const script = document.getElementById("scriptText").textContent;
@@ -435,35 +434,51 @@ async function generateVoice() {
     }
 
     status.style.display = "block";
-    status.innerHTML = "🎙️ Generating AI voice...";
+    status.innerHTML = "🎙️ Preparing your narration...";
 
     try {
 
+        // Split the complete script into safe chunks.
+        // Each chunk stays below the 2,000-character limit.
         const chunks = [];
-        let remaining = script;
+        let remaining = script.trim();
 
         while (remaining.length > 0) {
 
-            let chunk = remaining.substring(0, 1900);
+            let chunk = remaining.substring(0, 1850);
 
-            // Try to end at a sentence/space instead of cutting a word
-            if (remaining.length > 1900) {
-                const lastSpace = chunk.lastIndexOf(" ");
-                if (lastSpace > 1000) {
-                    chunk = chunk.substring(0, lastSpace);
+            // Avoid cutting a sentence or word when possible.
+            if (remaining.length > 1850) {
+
+                const lastSentence = Math.max(
+                    chunk.lastIndexOf(". "),
+                    chunk.lastIndexOf("! "),
+                    chunk.lastIndexOf("? ")
+                );
+
+                if (lastSentence > 900) {
+                    chunk = chunk.substring(0, lastSentence + 1);
+                } else {
+
+                    const lastSpace = chunk.lastIndexOf(" ");
+
+                    if (lastSpace > 900) {
+                        chunk = chunk.substring(0, lastSpace);
+                    }
                 }
             }
 
             chunks.push(chunk);
-            remaining = remaining.substring(chunk.length);
+            remaining = remaining.substring(chunk.length).trim();
         }
 
         const audioParts = [];
 
+        // Generate every chunk.
         for (let i = 0; i < chunks.length; i++) {
 
             status.innerHTML =
-                "🎙️ Generating AI voice...<br><br>" +
+                "🎙️ Generating narration...<br><br>" +
                 "Part " + (i + 1) + " of " + chunks.length;
 
             const response = await fetch(
@@ -483,14 +498,22 @@ async function generateVoice() {
             );
 
             if (!response.ok) {
-                const error = await response.text();
-                throw new Error(error);
+
+                const errorText = await response.text();
+
+                throw new Error(
+                    "Voice request failed on part " +
+                    (i + 1) + ": " +
+                    errorText
+                );
             }
 
             const audioBlob = await response.blob();
+
             audioParts.push(audioBlob);
         }
 
+        // Combine the generated audio parts.
         const combinedAudio = new Blob(audioParts, {
             type: "audio/mpeg"
         });
@@ -500,7 +523,8 @@ async function generateVoice() {
         voicePlayer.src = audioUrl;
         voicePlayer.style.display = "block";
 
-        status.innerHTML = "✅ Full AI voice generated!";
+        status.innerHTML =
+            "✅ Complete narration generated!";
 
     } catch (error) {
 
@@ -511,7 +535,5 @@ async function generateVoice() {
             error.message;
     }
 }
-</script>
-
 </body>
 </html>
