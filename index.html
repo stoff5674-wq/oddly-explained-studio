@@ -333,13 +333,21 @@ button:hover {
 <button onclick="generateVoice()">
     🎙️ Generate Voice
 </button>
-
+<button onclick="generateScenes()">
+    🎬 Generate Scenes
+</button>
 <audio id="voicePlayer" controls style="display:none; width:100%; margin-top:15px;"></audio>
     <button onclick="copyScript()" style="margin-top:15px;">
         📋 Copy Script
     </button>
 </div>
+<div id="sceneOutput" style="display:none; margin-top:20px; padding:20px; background:#101015; border:1px solid #29292f; border-radius:12px;">
 
+    <h2>🎬 Generated Scenes</h2>
+
+    <pre id="sceneText" style="white-space:pre-wrap; font-family:Arial,sans-serif; color:#ddd; line-height:1.6;"></pre>
+
+</div>
 <script>
 async function generateEpisode() {
 
@@ -536,6 +544,63 @@ async function generateVoice() {
 
         status.innerHTML =
             "❌ Voice generation failed.<br><br>" +
+            error.message;
+    }
+}
+async function generateScenes() {
+
+    const script = document.getElementById("scriptText").textContent;
+    const status = document.getElementById("status");
+
+    if (!script.trim()) {
+        status.style.display = "block";
+        status.innerHTML = "⚠️ Generate a script first.";
+        return;
+    }
+
+    status.style.display = "block";
+    status.innerHTML = "🎬 Creating your scenes...";
+
+    try {
+
+        const response = await fetch(
+            "https://green-mud-581b.oseghalesolomon10.workers.dev",
+            {
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify({
+                    action: "scenes",
+                    text: script
+                })
+            }
+        );
+
+        const data = await response.json();
+
+        if (!response.ok) {
+            throw new Error(
+                data.error || "Scene generation failed."
+            );
+        }
+
+        document.getElementById("sceneOutput").style.display = "block";
+
+        document.getElementById("sceneText").textContent =
+            data.scenes || data.script || "No scenes were returned.";
+
+        status.innerHTML =
+            "✅ Scenes generated successfully!";
+
+    } catch (error) {
+
+        console.error(error);
+
+        status.innerHTML =
+            "❌ Scene generation failed.<br><br>" +
             error.message;
     }
 }
