@@ -2818,7 +2818,698 @@ header {
 .episodes-panel:hover {
     border-color: rgba(255, 90, 31, 0.12);
 }
+/* =========================
+   HERO ENTRANCE AURA
+========================= */
 
+.hero {
+    position: relative;
+    isolation: isolate;
+}
+
+.hero::before {
+    content: "";
+
+    position: absolute;
+    width: 650px;
+    height: 650px;
+
+    top: -280px;
+    left: 50%;
+    transform: translateX(-50%);
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 90, 31, 0.12),
+        transparent 68%
+    );
+
+    filter: blur(18px);
+
+    pointer-events: none;
+    z-index: -1;
+
+    animation: heroAura 6s ease-in-out infinite;
+}
+
+@keyframes heroAura {
+    0%, 100% {
+        opacity: 0.65;
+        transform: translateX(-50%) scale(0.96);
+    }
+
+    50% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1.04);
+    }
+}
+
+.hero-badge {
+    box-shadow:
+        0 0 18px rgba(255, 90, 31, 0.06);
+}
+
+.hero-dot {
+    box-shadow:
+        0 0 10px rgba(255, 90, 31, 0.8);
+
+    animation: heroDotPulse 2s ease-in-out infinite;
+}
+
+@keyframes heroDotPulse {
+    0%, 100% {
+        opacity: 0.6;
+        transform: scale(0.85);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.15);
+    }
+}
+/* =========================
+   PREMIUM GENERATOR INPUTS
+========================= */
+
+.generator input,
+.generator select,
+.generator textarea {
+    transition:
+        border-color 0.25s ease,
+        box-shadow 0.25s ease,
+        background 0.25s ease;
+}
+
+.generator input:focus,
+.generator select:focus,
+.generator textarea:focus {
+    outline: none;
+
+    border-color: rgba(255, 90, 31, 0.5);
+
+    background: rgba(255, 90, 31, 0.025);
+
+    box-shadow:
+        0 0 0 3px rgba(255, 90, 31, 0.06),
+        0 0 22px rgba(255, 90, 31, 0.08);
+}
+
+.generator input:hover,
+.generator select:hover,
+.generator textarea:hover {
+    border-color: rgba(255, 90, 31, 0.22);
+}
+
+.generator label {
+    transition:
+        color 0.2s ease;
+}
+
+.generator input:focus + label,
+.generator select:focus + label,
+.generator textarea:focus + label {
+    color: #ff6a2b;
+}
+/* =========================
+   AI WORKSTATION EMPHASIS
+========================= */
+
+.generator {
+    position: relative;
+    overflow: hidden;
+
+    border-color: rgba(255, 90, 31, 0.12);
+
+    box-shadow:
+        0 25px 60px rgba(0, 0, 0, 0.35),
+        0 0 45px rgba(255, 90, 31, 0.045),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.generator::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 8%;
+
+    width: 84%;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 90, 31, 0.5),
+        transparent
+    );
+
+    box-shadow:
+        0 0 14px rgba(255, 90, 31, 0.18);
+
+    pointer-events: none;
+}
+
+.generator::after {
+    content: "";
+
+    position: absolute;
+
+    width: 320px;
+    height: 320px;
+
+    top: -180px;
+    right: -120px;
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 90, 31, 0.08),
+        transparent 70%
+    );
+
+    filter: blur(12px);
+
+    pointer-events: none;
+}
+/* =========================
+   HERO STATUS BADGE
+========================= */
+
+.hero-badge {
+    position: relative;
+    overflow: hidden;
+
+    border-color: rgba(255, 90, 31, 0.18);
+
+    box-shadow:
+        0 0 20px rgba(255, 90, 31, 0.06),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.hero-badge::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 45%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.07),
+        transparent
+    );
+
+    pointer-events: none;
+
+    animation: badgeSweep 5s ease-in-out infinite;
+}
+
+@keyframes badgeSweep {
+    0%, 55% {
+        left: -100%;
+    }
+
+    75% {
+        left: 140%;
+    }
+
+    100% {
+        left: 140%;
+    }
+}
+/* =========================
+   HERO HEADLINE EMPHASIS
+========================= */
+
+.hero h1 {
+    position: relative;
+    letter-spacing: -1.5px;
+}
+
+.hero h1 span {
+    position: relative;
+    display: inline-block;
+}
+
+.hero h1 span::after {
+    content: "";
+
+    position: absolute;
+
+    left: 5%;
+    right: 5%;
+    bottom: -8px;
+
+    height: 2px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 90, 31, 0.65),
+        transparent
+    );
+
+    filter: blur(1px);
+
+    opacity: 0.55;
+
+    animation: headlinePulse 3.5s ease-in-out infinite;
+}
+
+@keyframes headlinePulse {
+    0%, 100% {
+        opacity: 0.35;
+        transform: scaleX(0.85);
+    }
+
+    50% {
+        opacity: 0.8;
+        transform: scaleX(1);
+    }
+}
+/* =========================
+   PREMIUM SELECT CONTROLS
+========================= */
+
+.generator select {
+    appearance: none;
+    -webkit-appearance: none;
+
+    cursor: pointer;
+
+    background-image:
+        linear-gradient(45deg, transparent 50%, #ff6a2b 50%),
+        linear-gradient(135deg, #ff6a2b 50%, transparent 50%);
+
+    background-position:
+        calc(100% - 18px) 50%,
+        calc(100% - 12px) 50%;
+
+    background-size:
+        6px 6px,
+        6px 6px;
+
+    background-repeat: no-repeat;
+
+    padding-right: 42px;
+}
+
+.generator select:hover {
+    border-color: rgba(255, 90, 31, 0.3);
+
+    box-shadow:
+        0 0 16px rgba(255, 90, 31, 0.05);
+}
+
+.generator select:focus {
+    border-color: rgba(255, 90, 31, 0.5);
+
+    box-shadow:
+        0 0 0 3px rgba(255, 90, 31, 0.06),
+        0 0 22px rgba(255, 90, 31, 0.08);
+}
+
+.generator select option {
+    background: #14141b;
+    color: #f5f5f7;
+}
+/* =========================
+   GENERATOR CONTROL DECK
+========================= */
+
+.generator .field,
+.generator .form-group,
+.generator .input-group {
+    transition:
+        transform 0.2s ease,
+        border-color 0.2s ease;
+}
+
+.generator .field:hover,
+.generator .form-group:hover,
+.generator .input-group:hover {
+    transform: translateY(-2px);
+}
+
+/* Selection labels */
+
+.generator label {
+    letter-spacing: 0.4px;
+}
+
+/* Give dropdown fields a subtle control-panel feel */
+
+.generator select {
+    box-shadow:
+        inset 0 1px 0 rgba(255, 255, 255, 0.025),
+        0 6px 18px rgba(0, 0, 0, 0.18);
+}
+
+.generator select:hover {
+    background-color: rgba(255, 90, 31, 0.025);
+}
+
+/* Focus indicator */
+
+.generator select:focus {
+    transform: translateY(-1px);
+}
+
+/* Keep mobile controls comfortable */
+
+@media (max-width: 600px) {
+    .generator select {
+        min-height: 46px;
+    }
+}
+/* =========================
+   PRODUCTION LAUNCH ZONE
+========================= */
+
+#generateEpisodeBtn {
+    position: relative;
+    z-index: 2;
+
+    min-height: 52px;
+
+    font-weight: 800;
+    letter-spacing: 0.3px;
+
+    border: 1px solid rgba(255, 120, 60, 0.35);
+
+    background:
+        linear-gradient(
+            135deg,
+            #ff6a2b,
+            #ff4d1c
+        );
+
+    box-shadow:
+        0 10px 30px rgba(255, 90, 31, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.16);
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        filter 0.25s ease;
+}
+
+#generateEpisodeBtn:hover {
+    transform: translateY(-3px);
+
+    filter: brightness(1.06);
+
+    box-shadow:
+        0 14px 40px rgba(255, 90, 31, 0.22),
+        0 0 25px rgba(255, 90, 31, 0.14),
+        inset 0 1px 0 rgba(255, 255, 255, 0.18);
+}
+
+#generateEpisodeBtn:active {
+    transform: translateY(-1px) scale(0.99);
+}
+
+#generateEpisodeBtn.ai-working {
+    filter: brightness(0.96);
+}
+/* =========================
+   CINEMATIC SCRIPT OUTPUT
+========================= */
+
+#scriptOutput {
+    position: relative;
+    overflow: hidden;
+
+    border-color: rgba(255, 90, 31, 0.14);
+
+    box-shadow:
+        0 20px 55px rgba(0, 0, 0, 0.3),
+        0 0 35px rgba(255, 90, 31, 0.04),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+#scriptOutput::before {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: 7%;
+
+    width: 86%;
+    height: 1px;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 90, 31, 0.45),
+        transparent
+    );
+
+    box-shadow:
+        0 0 14px rgba(255, 90, 31, 0.16);
+
+    pointer-events: none;
+}
+
+#scriptOutput h2 {
+    text-shadow:
+        0 0 18px rgba(255, 90, 31, 0.08);
+}
+
+#scriptText {
+    line-height: 1.8;
+
+    color: rgba(245, 245, 247, 0.9);
+
+    text-shadow:
+        0 1px 2px rgba(0, 0, 0, 0.35);
+}
+
+#scriptOutput:hover {
+    border-color: rgba(255, 90, 31, 0.22);
+}
+/* =========================
+   SCRIPT ACTION BUTTON
+========================= */
+
+#scriptOutput button {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        border-color 0.25s ease;
+}
+
+#scriptOutput button:hover {
+    transform: translateY(-2px);
+
+    border-color: rgba(255, 90, 31, 0.3);
+
+    box-shadow:
+        0 8px 25px rgba(0, 0, 0, 0.28),
+        0 0 18px rgba(255, 90, 31, 0.07);
+}
+
+#scriptOutput button:active {
+    transform: translateY(0);
+}
+
+#scriptOutput button::after {
+    content: "";
+
+    position: absolute;
+
+    top: 0;
+    left: -100%;
+
+    width: 45%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.08),
+        transparent
+    );
+
+    pointer-events: none;
+}
+
+#scriptOutput button:hover::after {
+    animation: scriptButtonSweep 0.8s ease forwards;
+}
+
+@keyframes scriptButtonSweep {
+    from {
+        left: -100%;
+    }
+
+    to {
+        left: 140%;
+    }
+}
+/* =========================
+   HEADER NAV POLISH
+========================= */
+
+header nav a {
+    position: relative;
+    transition:
+        color 0.2s ease,
+        text-shadow 0.2s ease;
+}
+
+header nav a::after {
+    content: "";
+
+    position: absolute;
+    left: 50%;
+    bottom: -7px;
+
+    width: 0;
+    height: 2px;
+
+    background: #ff6a2b;
+
+    box-shadow:
+        0 0 10px rgba(255, 90, 31, 0.5);
+
+    transform: translateX(-50%);
+
+    transition: width 0.25s ease;
+}
+
+header nav a:hover {
+    color: #ff6a2b;
+
+    text-shadow:
+        0 0 12px rgba(255, 90, 31, 0.18);
+}
+
+header nav a:hover::after {
+    width: 70%;
+}
+/* ================================
+   STEP 22 — MOBILE POLISH
+================================ */
+
+@media (max-width: 700px) {
+
+  /* Page spacing */
+  body {
+    padding: 0;
+    overflow-x: hidden;
+  }
+
+  header {
+    padding: 16px 18px;
+  }
+
+  /* Header / navigation */
+  header {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  header nav {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 14px;
+  }
+
+  header nav a {
+    font-size: 13px;
+  }
+
+  /* Main content */
+  main {
+    width: 100%;
+    padding: 20px 14px;
+    box-sizing: border-box;
+  }
+
+  /* Cards / sections */
+  .card,
+  .panel,
+  .container {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Form fields */
+  input,
+  textarea,
+  select {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    font-size: 16px;
+  }
+
+  textarea {
+    min-height: 120px;
+  }
+
+  /* Buttons */
+  button {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Generated script */
+  #scriptOutput {
+    width: 100%;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  #scriptText {
+    width: 100%;
+    box-sizing: border-box;
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    word-break: break-word;
+  }
+
+  /* Scene cards / generated sections */
+  .scene,
+  .scene-card {
+    width: 100%;
+    box-sizing: border-box;
+  }
+
+  /* Headings */
+  h1 {
+    font-size: 28px;
+    line-height: 1.15;
+  }
+
+  h2 {
+    font-size: 22px;
+  }
+
+  h3 {
+    font-size: 18px;
+  }
+
+  /* Prevent long text from breaking the layout */
+  p,
+  label,
+  span {
+    overflow-wrap: anywhere;
+  }
+}
 </style>
 </head>
 
