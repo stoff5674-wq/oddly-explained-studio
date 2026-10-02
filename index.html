@@ -1864,6 +1864,361 @@ header::after {
         flex-wrap: wrap;
     }
 }
+/* =========================
+   CINEMATIC EPISODE PREVIEW
+========================= */
+
+.demo-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 9999;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    padding: 20px;
+
+    opacity: 0;
+    visibility: hidden;
+
+    transition:
+        opacity 0.3s ease,
+        visibility 0.3s ease;
+}
+
+.demo-modal.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.demo-modal-backdrop {
+    position: absolute;
+    inset: 0;
+
+    background: rgba(0, 0, 0, 0.82);
+
+    backdrop-filter: blur(12px);
+}
+
+.demo-modal-card {
+    position: relative;
+
+    width: min(850px, 100%);
+
+    border: 1px solid rgba(255, 255, 255, 0.09);
+    border-radius: 22px;
+
+    background: #0d0d12;
+
+    box-shadow:
+        0 35px 100px rgba(0, 0, 0, 0.65),
+        0 0 60px rgba(255, 90, 31, 0.08);
+
+    overflow: hidden;
+
+    transform: translateY(20px) scale(0.97);
+
+    transition: transform 0.35s ease;
+}
+
+.demo-modal.active .demo-modal-card {
+    transform: translateY(0) scale(1);
+}
+
+.demo-close {
+    position: absolute;
+
+    top: 14px;
+    right: 14px;
+
+    z-index: 10;
+
+    width: 34px;
+    height: 34px;
+
+    border: 1px solid rgba(255, 255, 255, 0.12);
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.45);
+
+    color: #ffffff;
+
+    font-size: 22px;
+    line-height: 1;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.demo-close:hover {
+    background: rgba(255, 90, 31, 0.2);
+    transform: rotate(90deg);
+}
+
+/* Preview */
+
+.demo-preview {
+    position: relative;
+
+    min-height: 390px;
+
+    display: flex;
+    align-items: flex-end;
+
+    padding: 42px;
+
+    background:
+        radial-gradient(
+            circle at 72% 32%,
+            rgba(255, 90, 31, 0.32),
+            transparent 22%
+        ),
+        radial-gradient(
+            circle at 30% 70%,
+            rgba(255, 90, 31, 0.08),
+            transparent 30%
+        ),
+        linear-gradient(
+            135deg,
+            #171218,
+            #08080c 72%
+        );
+
+    overflow: hidden;
+}
+
+.demo-preview::before {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    background:
+        linear-gradient(
+            115deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.035) 31%,
+            transparent 32%
+        );
+
+    transform: scale(1.5);
+}
+
+.demo-preview-glow {
+    position: absolute;
+
+    width: 180px;
+    height: 180px;
+
+    right: 15%;
+    top: 12%;
+
+    border-radius: 50%;
+
+    background: rgba(255, 90, 31, 0.13);
+
+    filter: blur(50px);
+
+    animation: demoGlow 4s ease-in-out infinite;
+}
+
+@keyframes demoGlow {
+    0%, 100% {
+        transform: scale(1);
+        opacity: 0.65;
+    }
+
+    50% {
+        transform: scale(1.2);
+        opacity: 1;
+    }
+}
+
+.demo-preview-content {
+    position: relative;
+    z-index: 3;
+
+    max-width: 600px;
+}
+
+.demo-preview-label {
+    color: #ff7950;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 2px;
+}
+
+.demo-preview-content h2 {
+    margin: 10px 0 12px;
+
+    color: #ffffff;
+
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 900;
+
+    line-height: 1;
+
+    letter-spacing: -1.5px;
+}
+
+.demo-preview-content p {
+    max-width: 520px;
+
+    margin: 0;
+
+    color: #a1a1aa;
+
+    font-size: 13px;
+    line-height: 1.6;
+}
+
+.demo-preview-status {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    margin-top: 20px;
+
+    color: #68c98b;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 1.2px;
+}
+
+.demo-preview-status span {
+    width: 6px;
+    height: 6px;
+
+    border-radius: 50%;
+
+    background: #55d98a;
+
+    box-shadow:
+        0 0 10px rgba(85, 217, 138, 0.8);
+
+    animation: systemPulse 1.6s infinite;
+}
+
+/* Scanline */
+
+.demo-scanline {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+    top: -2px;
+
+    height: 1px;
+
+    background: #ff6a2b;
+
+    box-shadow:
+        0 0 12px rgba(255, 90, 31, 0.9);
+
+    opacity: 0.45;
+
+    animation: demoScan 5s linear infinite;
+}
+
+@keyframes demoScan {
+    0% {
+        top: 0;
+    }
+
+    100% {
+        top: 100%;
+    }
+}
+
+/* Info */
+
+.demo-info {
+    padding: 22px 28px;
+
+    background: #101016;
+}
+
+.demo-info > div {
+    display: flex;
+    gap: 12px;
+
+    margin-bottom: 10px;
+}
+
+.demo-info > div span {
+    color: #686873;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.demo-info p {
+    margin: 0;
+
+    max-width: 620px;
+
+    color: #777782;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.demo-action {
+    margin-top: 16px;
+
+    padding: 9px 14px;
+
+    border: 1px solid rgba(255, 90, 31, 0.22);
+    border-radius: 9px;
+
+    background: rgba(255, 90, 31, 0.07);
+
+    color: #ff8055;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+
+    cursor: pointer;
+
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.demo-action:hover {
+    background: rgba(255, 90, 31, 0.15);
+    transform: translateY(-2px);
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+    .demo-preview {
+        min-height: 340px;
+        padding: 28px;
+    }
+
+    .demo-info {
+        padding: 18px;
+    }
+
+    .demo-preview-content h2 {
+        font-size: 29px;
+    }
+}
 </style>
 </head>
 
@@ -2588,7 +2943,94 @@ async function generateScenes() {
             error.message;
     }
 }
-</script>
+// =========================
+// CINEMATIC DEMO PREVIEW
+// =========================
 
+function openDemoEpisode() {
+    const modal = document.getElementById("demoEpisodeModal");
+
+    if (!modal) return;
+
+    modal.classList.add("active");
+
+    document.body.style.overflow = "hidden";
+}
+
+function closeDemoEpisode() {
+    const modal = document.getElementById("demoEpisodeModal");
+
+    if (!modal) return;
+
+    modal.classList.remove("active");
+
+    document.body.style.overflow = "";
+}
+</script>
+<!-- =========================
+     CINEMATIC EPISODE PREVIEW
+========================= -->
+
+<div id="demoEpisodeModal" class="demo-modal">
+
+    <div class="demo-modal-backdrop" onclick="closeDemoEpisode()"></div>
+
+    <div class="demo-modal-card">
+
+        <button class="demo-close" onclick="closeDemoEpisode()">
+            ×
+        </button>
+
+        <div class="demo-preview">
+
+            <div class="demo-preview-glow"></div>
+
+            <div class="demo-preview-content">
+
+                <span class="demo-preview-label">
+                    ODDLY EXPLAINED • DEMO EPISODE
+                </span>
+
+                <h2>The Strange Story Behind Centralia</h2>
+
+                <p>
+                    Beneath an abandoned Pennsylvania town,
+                    something has been burning for decades.
+                </p>
+
+                <div class="demo-preview-status">
+                    <span></span>
+                    CINEMATIC PREVIEW READY
+                </div>
+
+            </div>
+
+            <div class="demo-scanline"></div>
+
+        </div>
+
+        <div class="demo-info">
+
+            <div>
+                <span>DOCUMENTARY</span>
+                <span>8 MIN</span>
+                <span>AI GENERATED</span>
+            </div>
+
+            <p>
+                Explore the story through AI-generated
+                narration, visual planning, and documentary
+                storytelling.
+            </p>
+
+            <button class="demo-action" onclick="closeDemoEpisode()">
+                CLOSE PREVIEW
+            </button>
+
+        </div>
+
+    </div>
+
+</div>
 </body>
 </html>
