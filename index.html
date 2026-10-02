@@ -2274,6 +2274,70 @@ header::after {
         left: 140%;
     }
 }
+/* =========================
+   CINEMATIC AURA BACKGROUND
+========================= */
+
+body {
+    position: relative;
+    overflow-x: hidden;
+}
+
+body::before {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+    z-index: -2;
+
+    background:
+        radial-gradient(
+            circle at 50% 10%,
+            rgba(255, 90, 31, 0.10),
+            transparent 35%
+        ),
+        radial-gradient(
+            circle at 85% 55%,
+            rgba(255, 90, 31, 0.045),
+            transparent 30%
+        ),
+        radial-gradient(
+            circle at 15% 80%,
+            rgba(255, 90, 31, 0.035),
+            transparent 28%
+        );
+}
+
+body::after {
+    content: "";
+    position: fixed;
+    inset: 0;
+
+    pointer-events: none;
+    z-index: -1;
+
+    opacity: 0.16;
+
+    background-image:
+        linear-gradient(
+            rgba(255,255,255,0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255,255,255,0.035) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    mask-image: linear-gradient(
+        to bottom,
+        black,
+        transparent 85%
+    );
+}
 </style>
 </head>
 
