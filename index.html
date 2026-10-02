@@ -2792,6 +2792,33 @@ header {
         transform: scale(1.1);
     }
 }
+/* =========================
+   GLASS STUDIO DEPTH
+========================= */
+
+.generator,
+.generator-card,
+.panel,
+.system-panel,
+.activity-panel,
+.episodes-panel {
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.22),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+}
+
+.generator:hover,
+.generator-card:hover,
+.panel:hover,
+.system-panel:hover,
+.activity-panel:hover,
+.episodes-panel:hover {
+    border-color: rgba(255, 90, 31, 0.12);
+}
+
 </style>
 </head>
 
