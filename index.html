@@ -2338,6 +2338,44 @@ body::after {
         transparent 85%
     );
 }
+/* =========================
+   HERO CINEMATIC GLOW
+========================= */
+
+.hero {
+    position: relative;
+    overflow: hidden;
+}
+
+.hero::after {
+    content: "";
+    position: absolute;
+    width: 500px;
+    height: 500px;
+
+    top: -220px;
+    right: -180px;
+
+    background: radial-gradient(
+        circle,
+        rgba(255, 90, 31, 0.14),
+        transparent 68%
+    );
+
+    pointer-events: none;
+    filter: blur(10px);
+}
+
+.hero h1 {
+    text-shadow:
+        0 0 35px rgba(255, 90, 31, 0.08);
+}
+
+.hero h1 span {
+    text-shadow:
+        0 0 18px rgba(255, 90, 31, 0.22),
+        0 0 45px rgba(255, 90, 31, 0.08);
+}
 </style>
 </head>
 
