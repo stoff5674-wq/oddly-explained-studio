@@ -2567,9 +2567,9 @@ header::after {
 
 
 
-  <button onclick="generateEpisode()">
-            ✨ Generate Episode
-        </button>
+  <button id="generateEpisodeBtn" onclick="generateEpisode()">
+    ✨ Generate Episode
+</button>
 <button onclick="testVoice()">
     🎙️ Test Voice
 </button>
@@ -2689,7 +2689,7 @@ header::after {
 </div>
 <script>
 async function generateEpisode() {
-
+setGenerationUI(true);
     const topic = document.getElementById("topic").value;
     const category = document.getElementById("category").value;
     const length = document.getElementById("length").value;
@@ -2965,6 +2965,82 @@ function closeDemoEpisode() {
     modal.classList.remove("active");
 
     document.body.style.overflow = "";
+}
+/* =========================
+   AI GENERATION BUTTON
+========================= */
+
+#generateEpisodeBtn {
+    position: relative;
+    overflow: hidden;
+
+    transition:
+        transform 0.2s ease,
+        box-shadow 0.25s ease,
+        opacity 0.25s ease;
+}
+
+#generateEpisodeBtn:hover {
+    transform: translateY(-2px);
+}
+
+#generateEpisodeBtn.ai-working {
+    pointer-events: none;
+    opacity: 0.85;
+
+    box-shadow:
+        0 0 25px rgba(255, 90, 31, 0.22);
+}
+
+#generateEpisodeBtn.ai-working::after {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -80%;
+
+    width: 55%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 255, 255, 0.18),
+        transparent
+    );
+
+    animation: aiButtonSweep 1.4s linear infinite;
+}
+
+@keyframes aiButtonSweep {
+    0% {
+        left: -80%;
+    }
+
+    100% {
+        left: 140%;
+    }
+}
+// =========================
+// AI GENERATION UI
+// =========================
+
+function setGenerationUI(working) {
+    const button = document.getElementById("generateEpisodeBtn");
+
+    if (!button) return;
+
+    if (working) {
+        button.classList.add("ai-working");
+        button.dataset.originalText = button.innerHTML;
+        button.innerHTML = "🧠 AI is thinking...";
+    } else {
+        button.classList.remove("ai-working");
+
+        if (button.dataset.originalText) {
+            button.innerHTML = button.dataset.originalText;
+        }
+    }
 }
 </script>
 <!-- =========================
