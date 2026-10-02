@@ -927,6 +927,79 @@ header::after {
             width: 100%;
         }
     }
+/* =========================
+   PREMIUM BRAND OVERRIDE
+========================= */
+
+.brand {
+    gap: 15px;
+}
+
+.brand-mark {
+    width: 50px;
+    height: 50px;
+    border-radius: 15px;
+    background:
+        radial-gradient(
+            circle at center,
+            rgba(255, 90, 31, 0.18),
+            rgba(255, 90, 31, 0.035) 65%
+        );
+    box-shadow:
+        0 0 28px rgba(255, 90, 31, 0.10),
+        inset 0 0 20px rgba(255, 90, 31, 0.06);
+}
+
+.brand-mark::before {
+    width: 80px;
+    height: 80px;
+}
+
+.brand-mark span {
+    font-size: 22px;
+    letter-spacing: -2px;
+}
+
+.brand-name {
+    font-size: 21px;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    line-height: 1;
+}
+
+.brand-name span {
+    text-shadow:
+        0 0 18px rgba(255, 90, 31, 0.28);
+}
+
+.brand-subtitle {
+    display: flex;
+    align-items: center;
+    gap: 7px;
+    margin-top: 6px;
+    font-size: 8px;
+    letter-spacing: 2px;
+}
+
+.brand-divider {
+    width: 3px;
+    height: 3px;
+    border-radius: 50%;
+    background: #ff6a2b;
+    box-shadow:
+        0 0 7px rgba(255, 90, 31, 0.7);
+}
+
+@media (max-width: 600px) {
+    .brand-mark {
+        width: 44px;
+        height: 44px;
+    }
+
+    .brand-name {
+        font-size: 17px;
+    }
+}
 </style>
 </head>
 
@@ -934,24 +1007,29 @@ header::after {
 
 <header>
 
-    <div class="brand">
+  <div class="brand">
 
-        <div class="brand-mark">
-            <span>O</span>
+    <div class="brand-mark">
+        <div class="brand-ring"></div>
+        <span class="brand-letter">O</span>
+        <span class="brand-play">▶</span>
+    </div>
+
+    <div class="brand-text">
+
+        <div class="brand-name">
+            ODDLY <span>EXPLAINED</span>
         </div>
 
-        <div class="brand-text">
-            <div class="brand-name">
-                Oddly <span>Explained</span>
-            </div>
-
-            <div class="brand-subtitle">
-                AI DOCUMENTARY STUDIO
-            </div>
+        <div class="brand-subtitle">
+            AI DOCUMENTARY STUDIO
+            <span class="brand-divider"></span>
+            STORY ENGINE
         </div>
 
     </div>
 
+</div>
     <div class="header-status">
         <span class="header-status-dot"></span>
         STUDIO ONLINE
