@@ -2489,6 +2489,72 @@ body::after {
         transform: scale(1.15);
     }
 }
+/* =========================
+   LIVE AI CONSOLE AURA
+========================= */
+
+.activity-panel {
+    position: relative;
+    overflow: hidden;
+}
+
+.activity-panel::before {
+    content: "";
+
+    position: absolute;
+    top: 0;
+    left: -100%;
+
+    width: 45%;
+    height: 100%;
+
+    background: linear-gradient(
+        90deg,
+        transparent,
+        rgba(255, 90, 31, 0.045),
+        transparent
+    );
+
+    pointer-events: none;
+
+    animation: consoleSweep 7s linear infinite;
+}
+
+@keyframes consoleSweep {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 160%;
+    }
+}
+
+.activity-line {
+    transition:
+        background 0.2s ease,
+        transform 0.2s ease;
+}
+
+.activity-line:hover {
+    transform: translateX(4px);
+
+    background: rgba(255, 90, 31, 0.035);
+}
+
+.activity-dot {
+    box-shadow:
+        0 0 8px rgba(255, 90, 31, 0.55);
+}
+
+.activity-current {
+    border-color: rgba(255, 90, 31, 0.18);
+}
+
+.activity-live-text {
+    text-shadow:
+        0 0 10px rgba(255, 90, 31, 0.35);
+}
 </style>
 </head>
 
