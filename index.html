@@ -2698,7 +2698,9 @@ setGenerationUI(true);
 
     const status = document.getElementById("status");
 
-    if (topic.trim() === "") {
+    if (topic.trim() === ""){
+    setGenerationUI(false);
+   
         status.style.display = "block";
         status.innerHTML =
             "⚠️ Please enter an episode topic first.";
@@ -2747,16 +2749,20 @@ setGenerationUI(true);
         document.getElementById("scriptText").textContent =
             data.script;
 
-    } catch (error) {
+        } catch (error) {
 
         console.error(error);
 
         status.innerHTML =
             "❌ Something went wrong.<br><br>" +
             error.message;
+
+    } finally {
+
+        setGenerationUI(false);
+
     }
 }
-
 
 function copyScript() {
 
