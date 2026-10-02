@@ -7,146 +7,425 @@
 <title>Oddly Explained Studio</title>
 
 <style>
-* {
-    box-sizing: border-box;
-}
-
-body {
-    margin: 0;
-    background: #0b0b0f;
-    color: #ffffff;
-    font-family: Arial, sans-serif;
-}
-
-header {
-    padding: 22px;
-    border-bottom: 1px solid #29292f;
-    background: #111116;
-}
-
-.logo {
-    font-size: 24px;
-    font-weight: bold;
-}
-
-.logo span {
-    color: #ff5a1f;
-}
-
-.container {
-    max-width: 900px;
-    margin: auto;
-    padding: 30px 20px;
-}
-
-.hero {
-    margin-bottom: 30px;
-}
-
-.hero h1 {
-    font-size: 36px;
-    margin-bottom: 8px;
-}
-
-.hero p {
-    color: #aaa;
-    font-size: 16px;
-}
-
-.card {
-    background: #15151b;
-    border: 1px solid #29292f;
-    border-radius: 16px;
-    padding: 22px;
-    margin-bottom: 20px;
-}
-
-.card h2 {
-    margin-top: 0;
-}
-
-label {
-    display: block;
-    margin-top: 18px;
-    margin-bottom: 7px;
-    color: #ddd;
-    font-weight: bold;
-}
-
-input,
-select,
-textarea {
-    width: 100%;
-    padding: 13px;
-    border-radius: 9px;
-    border: 1px solid #33333b;
-    background: #0d0d12;
-    color: white;
-    font-size: 15px;
-}
-
-textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-button {
-    width: 100%;
-    margin-top: 25px;
-    padding: 15px;
-    border: none;
-    border-radius: 10px;
-    background: #ff5a1f;
-    color: white;
-    font-size: 16px;
-    font-weight: bold;
-    cursor: pointer;
-}
-
-button:hover {
-    opacity: 0.9;
-}
-
-#status {
-    display: none;
-    margin-top: 20px;
-    padding: 15px;
-    background: #202027;
-    border-radius: 10px;
-    color: #ccc;
-}
-
-.features {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-}
-
-.feature {
-    background: #101015;
-    padding: 15px;
-    border-radius: 10px;
-    border: 1px solid #29292f;
-}
-
-.feature strong {
-    display: block;
-    margin-bottom: 5px;
-}
-
-.feature small {
-    color: #999;
-}
-
-@media (max-width: 650px) {
-    .features {
-        grid-template-columns: 1fr;
+    * {
+        box-sizing: border-box;
     }
 
-    .hero h1 {
-        font-size: 28px;
+    html {
+        scroll-behavior: smooth;
     }
-}
+
+    body {
+        margin: 0;
+        min-height: 100vh;
+        background:
+            radial-gradient(circle at top right, rgba(255, 90, 31, 0.10), transparent 30%),
+            radial-gradient(circle at bottom left, rgba(255, 140, 60, 0.06), transparent 28%),
+            #09090d;
+        color: #f5f5f7;
+        font-family: Arial, Helvetica, sans-serif;
+        line-height: 1.6;
+    }
+
+    button,
+    input,
+    select,
+    textarea {
+        font: inherit;
+    }
+
+    button {
+        cursor: pointer;
+    }
+
+    /* =========================
+       MAIN LAYOUT
+    ========================= */
+
+    header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        width: 100%;
+        padding: 18px 24px;
+        background: rgba(12, 12, 18, 0.88);
+        backdrop-filter: blur(14px);
+        -webkit-backdrop-filter: blur(14px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.07);
+    }
+
+    header h1 {
+        margin: 0;
+        font-size: clamp(22px, 4vw, 30px);
+        font-weight: 800;
+        letter-spacing: -0.6px;
+        color: #ffffff;
+    }
+
+    header p {
+        margin: 4px 0 0;
+        color: #9b9ba6;
+        font-size: 14px;
+    }
+
+    main {
+        width: min(1100px, calc(100% - 32px));
+        margin: 0 auto;
+        padding: 32px 0 60px;
+    }
+
+    /* =========================
+       HERO / INTRO
+    ========================= */
+
+    .hero,
+    .intro,
+    .hero-section {
+        margin-bottom: 26px;
+    }
+
+    .hero h2,
+    .intro h2,
+    .hero-section h2 {
+        margin: 0 0 8px;
+        font-size: clamp(25px, 5vw, 40px);
+        line-height: 1.15;
+        letter-spacing: -1px;
+    }
+
+    .hero p,
+    .intro p,
+    .hero-section p {
+        margin: 0;
+        max-width: 760px;
+        color: #a7a7b2;
+    }
+
+    /* =========================
+       CARDS
+    ========================= */
+
+    section,
+    .card,
+    .panel,
+    .generator,
+    .generator-card,
+    .pipeline,
+    .pipeline-card {
+        border-radius: 20px;
+    }
+
+    .generator,
+    .generator-card,
+    .panel {
+        background: rgba(20, 20, 27, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.075);
+        box-shadow:
+            0 18px 50px rgba(0, 0, 0, 0.24),
+            inset 0 1px 0 rgba(255, 255, 255, 0.025);
+    }
+
+    /* =========================
+       FORM
+    ========================= */
+
+    label {
+        display: block;
+        margin: 0 0 8px;
+        color: #e7e7ec;
+        font-size: 14px;
+        font-weight: 700;
+    }
+
+    input,
+    select,
+    textarea {
+        width: 100%;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+        border-radius: 12px;
+        background: #111117;
+        color: #f6f6f8;
+        padding: 13px 14px;
+        outline: none;
+        transition:
+            border-color 0.2s ease,
+            box-shadow 0.2s ease,
+            background 0.2s ease;
+    }
+
+    input::placeholder,
+    textarea::placeholder {
+        color: #6f6f7a;
+    }
+
+    input:focus,
+    select:focus,
+    textarea:focus {
+        border-color: rgba(255, 90, 31, 0.75);
+        background: #141419;
+        box-shadow: 0 0 0 3px rgba(255, 90, 31, 0.10);
+    }
+
+    textarea {
+        min-height: 130px;
+        resize: vertical;
+    }
+
+    option {
+        background: #111117;
+        color: #ffffff;
+    }
+
+    /* =========================
+       BUTTONS
+    ========================= */
+
+    button {
+        border: 0;
+        border-radius: 12px;
+        padding: 12px 17px;
+        font-weight: 700;
+        color: #ffffff;
+        background: #1c1c24;
+        transition:
+            transform 0.18s ease,
+            background 0.18s ease,
+            box-shadow 0.18s ease,
+            opacity 0.18s ease;
+    }
+
+    button:hover {
+        transform: translateY(-1px);
+        background: #272730;
+    }
+
+    button:active {
+        transform: translateY(0);
+    }
+
+    button:disabled {
+        cursor: not-allowed;
+        opacity: 0.55;
+        transform: none;
+    }
+
+    /* Main action buttons */
+    button[onclick="generateEpisode()"],
+    button[onclick="generateVoice()"],
+    button[onclick="generateScenes()"] {
+        background: linear-gradient(135deg, #ff6a2b, #ff4d16);
+        color: #ffffff;
+        box-shadow: 0 10px 25px rgba(255, 90, 31, 0.20);
+    }
+
+    button[onclick="generateEpisode()"]:hover,
+    button[onclick="generateVoice()"]:hover,
+    button[onclick="generateScenes()"]:hover {
+        background: linear-gradient(135deg, #ff783d, #ff5a1f);
+        box-shadow: 0 13px 30px rgba(255, 90, 31, 0.28);
+    }
+
+    button[onclick="testVoice()"] {
+        background: #17171e;
+        border: 1px solid rgba(255, 90, 31, 0.35);
+    }
+
+    button[onclick="copyScript()"] {
+        background: #17171e;
+        border: 1px solid rgba(255, 255, 255, 0.09);
+    }
+
+    /* =========================
+       STATUS
+    ========================= */
+
+    #status {
+        margin: 18px 0;
+        padding: 14px 16px;
+        border-radius: 12px;
+        color: #d6d6de;
+        background: rgba(255, 255, 255, 0.035);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        font-size: 14px;
+        word-break: break-word;
+    }
+
+    /* =========================
+       GENERATED SCRIPT
+    ========================= */
+
+    #scriptOutput {
+        margin-top: 24px;
+        padding: 22px;
+        border-radius: 20px;
+        background: rgba(20, 20, 27, 0.90);
+        border: 1px solid rgba(255, 90, 31, 0.16);
+        box-shadow: 0 18px 50px rgba(0, 0, 0, 0.22);
+    }
+
+    #scriptOutput h2 {
+        margin: 0 0 15px;
+        font-size: 21px;
+        color: #ffffff;
+    }
+
+    #scriptText {
+        width: 100%;
+        min-height: 300px;
+        max-height: 620px;
+        overflow: auto;
+        margin: 0 0 16px;
+        padding: 18px;
+        border-radius: 14px;
+        background: #0c0c11;
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        color: #ddddE5;
+        font-family: "Courier New", monospace;
+        font-size: 13px;
+        line-height: 1.75;
+        white-space: pre-wrap;
+        overflow-wrap: anywhere;
+    }
+
+    #scriptText::-webkit-scrollbar {
+        width: 8px;
+        height: 8px;
+    }
+
+    #scriptText::-webkit-scrollbar-thumb {
+        background: #2b2b34;
+        border-radius: 999px;
+    }
+
+    /* =========================
+       AUDIO
+    ========================= */
+
+    #voicePlayer {
+        width: 100%;
+        margin-top: 15px;
+        border-radius: 12px;
+    }
+
+    /* =========================
+       PRODUCTION PIPELINE
+    ========================= */
+
+    .pipeline {
+        margin-top: 30px;
+    }
+
+    .pipeline h2,
+    .pipeline h3 {
+        color: #ffffff;
+    }
+
+    .pipeline-grid,
+    .pipeline-cards {
+        display: grid;
+        grid-template-columns: repeat(5, minmax(0, 1fr));
+        gap: 12px;
+    }
+
+    .pipeline-card {
+        padding: 18px 14px;
+        background: rgba(19, 19, 25, 0.82);
+        border: 1px solid rgba(255, 255, 255, 0.07);
+        transition:
+            transform 0.2s ease,
+            border-color 0.2s ease,
+            background 0.2s ease;
+    }
+
+    .pipeline-card:hover {
+        transform: translateY(-2px);
+        border-color: rgba(255, 90, 31, 0.24);
+        background: rgba(24, 24, 31, 0.95);
+    }
+
+    .pipeline-card strong,
+    .pipeline-card h3 {
+        display: block;
+        margin-bottom: 5px;
+        color: #f4f4f7;
+        font-size: 15px;
+    }
+
+    .pipeline-card span,
+    .pipeline-card p {
+        margin: 0;
+        color: #858591;
+        font-size: 12px;
+    }
+
+    /* =========================
+       LINKS
+    ========================= */
+
+    a {
+        color: #ff7b43;
+        text-decoration: none;
+    }
+
+    a:hover {
+        text-decoration: underline;
+    }
+
+    /* =========================
+       SELECTION
+    ========================= */
+
+    ::selection {
+        background: rgba(255, 90, 31, 0.28);
+        color: #ffffff;
+    }
+
+    /* =========================
+       MOBILE / TABLET
+    ========================= */
+
+    @media (max-width: 850px) {
+        main {
+            width: min(100% - 24px, 720px);
+            padding-top: 24px;
+        }
+
+        .pipeline-grid,
+        .pipeline-cards {
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+    }
+
+    @media (max-width: 560px) {
+        header {
+            padding: 15px 16px;
+        }
+
+        main {
+            width: calc(100% - 18px);
+            padding: 20px 0 45px;
+        }
+
+        #scriptOutput {
+            padding: 15px;
+            border-radius: 16px;
+        }
+
+        #scriptText {
+            min-height: 240px;
+            padding: 14px;
+            font-size: 12px;
+        }
+
+        .pipeline-grid,
+        .pipeline-cards {
+            grid-template-columns: 1fr;
+        }
+
+        button {
+            width: 100%;
+        }
+    }
 </style>
 </head>
 
