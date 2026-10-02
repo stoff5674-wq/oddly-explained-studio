@@ -1462,6 +1462,408 @@ header::after {
         grid-template-columns: 40px 1fr auto;
     }
 }
+/* =========================
+   RECENT EPISODES
+========================= */
+
+.episodes-panel {
+    position: relative;
+    margin-top: 18px;
+    margin-bottom: 18px;
+    padding: 24px;
+
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    border-radius: 20px;
+
+    background:
+        linear-gradient(
+            145deg,
+            rgba(255, 255, 255, 0.045),
+            rgba(255, 255, 255, 0.012)
+        ),
+        #0f0f15;
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.22);
+
+    overflow: hidden;
+}
+
+/* Ambient glow */
+
+.episodes-panel::before {
+    content: "";
+
+    position: absolute;
+    top: -100px;
+    right: -80px;
+
+    width: 240px;
+    height: 240px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 90, 31, 0.065);
+
+    filter: blur(60px);
+
+    pointer-events: none;
+}
+
+/* Header */
+
+.episodes-header {
+    position: relative;
+
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    margin-bottom: 18px;
+}
+
+.episodes-header h2 {
+    margin: 0;
+
+    color: #ffffff;
+
+    font-size: 21px;
+    font-weight: 850;
+
+    letter-spacing: -0.5px;
+}
+
+.episodes-header p {
+    margin: 6px 0 0;
+
+    color: #676772;
+
+    font-size: 11px;
+}
+
+.episodes-count {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    padding: 7px 11px;
+
+    border: 1px solid rgba(255, 90, 31, 0.16);
+    border-radius: 999px;
+
+    background: rgba(255, 90, 31, 0.04);
+
+    color: #777782;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.episodes-count span {
+    color: #ff7745;
+
+    font-size: 11px;
+}
+
+/* Episode Card */
+
+.episode-card {
+    position: relative;
+
+    display: grid;
+    grid-template-columns: 230px 1fr;
+
+    min-height: 170px;
+
+    border: 1px solid rgba(255, 255, 255, 0.055);
+    border-radius: 16px;
+
+    background: #09090d;
+
+    overflow: hidden;
+
+    transition:
+        transform 0.3s ease,
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+}
+
+.episode-card:hover {
+    transform: translateY(-4px);
+
+    border-color: rgba(255, 90, 31, 0.22);
+
+    box-shadow:
+        0 18px 45px rgba(0, 0, 0, 0.28),
+        0 0 35px rgba(255, 90, 31, 0.055);
+}
+
+/* Thumbnail */
+
+.episode-thumbnail {
+    position: relative;
+
+    min-height: 170px;
+
+    background:
+        radial-gradient(
+            circle at 65% 40%,
+            rgba(255, 90, 31, 0.32),
+            transparent 25%
+        ),
+        linear-gradient(
+            135deg,
+            #18131a,
+            #09090d 70%
+        );
+
+    overflow: hidden;
+}
+
+/* Cinematic lines */
+
+.episode-thumbnail::before {
+    content: "";
+
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            120deg,
+            transparent 20%,
+            rgba(255, 255, 255, 0.035) 21%,
+            transparent 22%
+        ),
+        linear-gradient(
+            160deg,
+            transparent 55%,
+            rgba(255, 90, 31, 0.09) 56%,
+            transparent 57%
+        );
+
+    transform: scale(1.4);
+
+    transition: transform 0.6s ease;
+}
+
+.episode-card:hover .episode-thumbnail::before {
+    transform: scale(1.55);
+}
+
+/* Thumbnail glow */
+
+.episode-thumbnail::after {
+    content: "";
+
+    position: absolute;
+
+    width: 90px;
+    height: 90px;
+
+    right: 30px;
+    top: 35px;
+
+    border-radius: 50%;
+
+    background: rgba(255, 90, 31, 0.12);
+
+    filter: blur(25px);
+}
+
+/* Overlay */
+
+.episode-overlay {
+    position: absolute;
+
+    inset: 0;
+
+    background:
+        linear-gradient(
+            180deg,
+            transparent 45%,
+            rgba(0, 0, 0, 0.75)
+        );
+
+    z-index: 2;
+}
+
+/* Play button */
+
+.episode-play {
+    position: absolute;
+
+    left: 50%;
+    top: 50%;
+
+    transform: translate(-50%, -50%);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    width: 48px;
+    height: 48px;
+
+    border: 1px solid rgba(255, 255, 255, 0.16);
+    border-radius: 50%;
+
+    background: rgba(0, 0, 0, 0.42);
+
+    backdrop-filter: blur(8px);
+
+    color: #ffffff;
+
+    font-size: 15px;
+
+    z-index: 3;
+
+    transition:
+        transform 0.3s ease,
+        background 0.3s ease,
+        border-color 0.3s ease;
+}
+
+.episode-card:hover .episode-play {
+    transform: translate(-50%, -50%) scale(1.1);
+
+    background: rgba(255, 90, 31, 0.18);
+
+    border-color: rgba(255, 90, 31, 0.4);
+
+    box-shadow:
+        0 0 25px rgba(255, 90, 31, 0.18);
+}
+
+/* Demo label */
+
+.episode-label {
+    position: absolute;
+
+    left: 12px;
+    bottom: 11px;
+
+    z-index: 4;
+
+    color: #ff875d;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 1.3px;
+}
+
+/* Episode info */
+
+.episode-info {
+    position: relative;
+
+    display: flex;
+    flex-direction: column;
+
+    justify-content: center;
+
+    padding: 24px;
+}
+
+.episode-topline {
+    display: flex;
+    gap: 7px;
+
+    margin-bottom: 8px;
+
+    color: #6c6c77;
+
+    font-size: 8px;
+    font-weight: 900;
+
+    letter-spacing: 1px;
+}
+
+.episode-info h3 {
+    margin: 0;
+
+    color: #f3f3f5;
+
+    font-size: 19px;
+    font-weight: 850;
+
+    letter-spacing: -0.5px;
+}
+
+.episode-info p {
+    max-width: 620px;
+
+    margin: 8px 0 16px;
+
+    color: #777782;
+
+    font-size: 11px;
+    line-height: 1.6;
+}
+
+.episode-meta {
+    display: flex;
+    align-items: center;
+
+    gap: 13px;
+
+    color: #666671;
+
+    font-size: 8px;
+    font-weight: 800;
+
+    letter-spacing: 0.8px;
+}
+
+.episode-meta strong {
+    margin-left: auto;
+
+    color: #65c98a;
+
+    font-size: 8px;
+
+    letter-spacing: 1px;
+}
+
+/* Mobile */
+
+@media (max-width: 700px) {
+
+    .episodes-panel {
+        padding: 18px;
+    }
+
+    .episodes-header {
+        align-items: flex-start;
+        flex-direction: column;
+    }
+
+    .episode-card {
+        grid-template-columns: 1fr;
+    }
+
+    .episode-thumbnail {
+        min-height: 150px;
+    }
+
+    .episode-info {
+        padding: 18px;
+    }
+
+    .episode-info h3 {
+        font-size: 17px;
+    }
+
+    .episode-meta {
+        flex-wrap: wrap;
+    }
+}
 </style>
 </head>
 
